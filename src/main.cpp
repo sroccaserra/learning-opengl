@@ -16,7 +16,7 @@ static const struct {
 };
 
 static const char* vertex_shader_text =
-"#version 110\n"
+"#version 330 core\n"
 "uniform mat4 MVP;\n"
 "attribute vec3 vCol;\n"
 "attribute vec2 vPos;\n"
@@ -28,7 +28,7 @@ static const char* vertex_shader_text =
 "}\n";
 
 static const char* fragment_shader_text =
-"#version 110\n"
+"#version 330 core\n"
 "varying vec3 color;\n"
 "void main()\n"
 "{\n"
@@ -50,11 +50,11 @@ int main(void) {
     if (!glfwInit())
         exit(EXIT_FAILURE);
 
-    GLFWwindow* window;
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    window = glfwCreateWindow(640, 480, "Simple example", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(640, 480, "Simple example", NULL, NULL);
     if (!window) {
         glfwTerminate();
         exit(EXIT_FAILURE);
@@ -66,7 +66,9 @@ int main(void) {
     gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
     glfwSwapInterval(1);
 
-    // NOTE: OpenGL error checks have been omitted for brevity
+    GLuint vertex_array;
+    glGenVertexArrays(1, &vertex_array);
+    glBindVertexArray(vertex_array);
 
     GLuint vertex_buffer;
     glGenBuffers(1, &vertex_buffer);
