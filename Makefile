@@ -5,7 +5,7 @@ run: hello
 	./hello
 
 hello: src/main.cpp
-	gcc -o hello $(SRC)/glad.c $(SRC)/main.cpp -Iinclude -I ~/.local/include -lm `pkg-config --libs glfw3` `pkg-config --libs opengl`
+	g++ -Wall -o hello $(SRC)/glad.c $(SRC)/main.cpp -Iinclude -I ~/.local/include -lm `pkg-config --libs glfw3` `pkg-config --libs opengl`
 
 .PHONY: clean
 clean:
