@@ -1,9 +1,11 @@
+SRC=src
+
 .PHONY: run
 run: hello
 	./hello
 
-hello: main.cpp
-	gcc -o hello glad.c main.cpp -I ~/.local/include -lm `pkg-config --libs glfw3` `pkg-config --libs opengl`
+hello: src/main.cpp
+	gcc -o hello $(SRC)/glad.c $(SRC)/main.cpp -Iinclude -I ~/.local/include -lm `pkg-config --libs glfw3` `pkg-config --libs opengl`
 
 .PHONY: clean
 clean:
@@ -11,12 +13,12 @@ clean:
 
 .PHONY: glad
 glad:
-	glad --generator c --no-loader --out-path output
-	cp output/src/glad.c .
+	glad --generator c --no-loader --out-path glad_output
+	cp glad_output/src/glad.c $(SRC)
 	mkdir -p ~/.local/include/glad
-	cp output/include/glad/glad.h ~/.local/include/glad
+	cp glad_output/include/glad/glad.h ~/.local/include/glad
 	mkdir -p ~/.local/include/KHR
-	cp output/include/KHR/khrplatform.h ~/.local/include/KHR
+	cp glad_output/include/KHR/khrplatform.h ~/.local/include/KHR
 
 .PHONY: deps
 deps:
