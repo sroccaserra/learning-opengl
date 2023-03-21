@@ -1,11 +1,11 @@
+#include <iostream>
+
 #include <glad/glad.h>
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
 #include "linmath.h"
 
-#include <stdlib.h>
-#include <stdio.h>
 
 static const struct {
     float x, y;
@@ -37,7 +37,7 @@ static const char* fragment_shader_text =
 "}\n";
 
 static void error_callback(int error, const char* description) {
-    fprintf(stderr, "Error: %s\n", description);
+    std::cerr << "Error: " << description << std::endl;
 }
 
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
